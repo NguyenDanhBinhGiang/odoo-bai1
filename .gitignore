@@ -14,3 +14,4 @@ SECURITY.md
 setup/
 setup.cfg
 setup.py
+.local/
