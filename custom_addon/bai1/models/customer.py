@@ -26,4 +26,16 @@ class Customer(models.Model):
             else:
                 customer.discount_amount = 0
 
+    def create(self, vals_list):
+        if not self.user_has_groups('bai1.advanced_sale'):
+            if 'discount_code' in vals_list:
+                raise odoo.exceptions.UserError('You do not have permission!')
+        return super(Customer, self).create(vals_list=vals_list)
+
+    def write(self, vals):
+        if not self.user_has_groups('bai1.advanced_sale'):
+            if 'discount_code' in vals:
+                raise odoo.exceptions.UserError('You do not have permission!')
+        return super(Customer, self).write(vals=vals)
+
 
