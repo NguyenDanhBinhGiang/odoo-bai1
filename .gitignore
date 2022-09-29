@@ -1,0 +1,16 @@
+addons/
+CONTRIBUTING.md
+COPYRIGHT
+debian/
+doc/
+.idea/
+LICENSE
+MANIFEST.in
+odoo/
+odoo-bin
+README.md
+requirements.txt
+SECURITY.md
+setup/
+setup.cfg
+setup.py
