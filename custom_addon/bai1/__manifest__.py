@@ -7,5 +7,7 @@
     'author': "me",
     'category': 'Administration',
     'depends': ['sale', 'base'],
-    'data': ['views/sale.xml'],
+    'data': ['views/sale.xml',
+             'views/customer.xml',
+             ],
 }

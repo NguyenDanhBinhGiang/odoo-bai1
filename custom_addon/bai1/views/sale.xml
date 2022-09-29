@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id='customer_action' model='ir.actions.act_window'>
-        <field name="name">Customers</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+
 
     <record id="res_users_view_form_simple_modif" model="ir.ui.view">
         <field name="name">Sale</field>
@@ -20,19 +16,4 @@
         </field>
     </record>
 
-    <menuitem id="customers_menu_catalog" name="Customers" parent="sale_menu_root" />
-
-    <record id="customer_view_form" model="ir.ui.view">
-    <field name="name">Customer View</field>
-    <field name="model">res.partner</field>
-    <field name="arch" type="xml">
-        <form>
-            <group>
-                <field name="name"/>
-                <field name="discount_code"/>
-                <field name="discount_amount"/>
-            </group>
-        </form>
-    </field>
-    </record>
 </odoo>
