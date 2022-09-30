@@ -8,21 +8,28 @@ class Customer(models.Model):
     _sql_constraints = []
     discount_code = fields.Char('Discount Code')
     discount_amount = fields.Integer('Discount Amount', compute='_compute_discount_amount')
+    valid_discount = fields.Boolean(compute='_valid_discount_compute',
+                                    store=True,
+                                    invisible=True)
 
-    @api.constrains('discount_code')
-    def _check_valid_discount_code(self):
-        for customer in self:
-            code = str(customer.discount_code).split('_')
-            if not (len(code) == 2 and code[0] == 'VIP' and code[1].isdigit() and 0 <= int(code[1]) <= 100):
-                raise odoo.exceptions.UserError('Discount code is not valid')
+    def _has_valid_discount_code(self):
+        self.ensure_one()
+        code = str(self.discount_code).split('_')
+        if len(code) == 2 and code[0] == 'VIP' and code[1].isdigit():
+            if 0 <= int(code[1]) <= 100:
+                return True
+        return False
+
+    @api.depends('discount_code')
+    def _valid_discount_compute(self):
+        for sale in self:
+            sale.valid_discount = sale._has_valid_discount_code()
 
     @api.depends('discount_code')
     def _compute_discount_amount(self):
         for customer in self:
-            if customer.discount_code:
-                customer.discount_amount = int(str(customer.discount_code).split('_')[1])
-                if customer.discount_amount < 0 or customer.discount_amount > 100:
-                    customer.discount_amount = 0
+            if customer._has_valid_discount_code():
+                customer.discount_amount = int(customer.discount_code.split('_')[1])
             else:
                 customer.discount_amount = 0
 

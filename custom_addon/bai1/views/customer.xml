@@ -8,7 +8,7 @@
             <group>
                 <field name="name"/>
                 <field name="discount_code" groups="bai1.advanced_sale"/>
-                <field name="discount_amount" />
+                <field name="discount_amount"/>
             </group>
         </form>
     </field>
@@ -36,6 +36,19 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="customer_action" id="customers_menu_catalog" name="Customers TEST" parent="sale.sale_menu_root"/>
+    <record id='valid_discount_customer_action' model='ir.actions.act_window'>
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('customer_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('customer_form')})]"
+        />
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('valid_discount', '=', True)]</field>
+    </record>
+
+    <menuitem id="customers_menu_catalog" name="Customers" parent="sale.sale_menu_root"/>
+    <menuitem action="customer_action" id="all_customers_catalog" name="All customer" parent="customers_menu_catalog"/>
+    <menuitem action="valid_discount_customer_action" id="discounted_customers_catalog" name="Discounted customer" parent="customers_menu_catalog"/>
 
 </odoo>
