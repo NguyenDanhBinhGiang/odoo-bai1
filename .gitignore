@@ -15,3 +15,4 @@ setup/
 setup.cfg
 setup.py
 .local/
+__pycache__/
