@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    amount_discounted = fields.Float('Discounted Total', compute='_amount_all')
+    amount_discounted = fields.Monetary('Discounted Total', compute='_amount_all', store=True)
     discount_code = fields.Char('Discount code', related='partner_id.discount_code', readonly=False)
 
     @api.depends('order_line.price_total', 'partner_id')

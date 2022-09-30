@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="discounted_amount" inherit_id="website_sale.total" customize_show="True" name="Discount amount">
+        <xpath expr="//tr[@id='order_total_taxes']" position="after">
+            <tr id="order_total_discounted">
+                <td class="text-right border-0">Discounted:</td>
+                <td class="text-xl-right border-0">
+                     <span t-field="website_sale_order.amount_discounted" class="monetary_field" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <template id="discounted_code" inherit_id="website_sale.reduction_code" customize_show="True" name="Discount code">
+        <xpath expr="//div[@id='cart_total']//table/tr[last()]" position="replace">
+            <tr t-if="not hide_promotions">
+                <td class="text-right border-0">Discount code:</td>
+                <td class="text-xl-right border-0">
+                    <span t-field="website_sale_order.discount_code" style="white-space: nowrap;"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>
