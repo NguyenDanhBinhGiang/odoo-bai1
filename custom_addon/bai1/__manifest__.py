@@ -5,11 +5,13 @@
     'summary': "A test add-on",
     'author': "me",
     'category': 'Administration',
-    'depends': ['sale', 'base'],
-    'data': ['views/sale.xml',
-             'views/customer.xml',
-            'security/group.xml',
-             'security/ir.model.access.csv',
-             ],
-}
+    'depends': ['sale', 'base','contacts'],
+    'data': [
+        'security/group.xml',
+        'security/ir.model.access.csv',
+        'views/sale.xml',
+        'views/customer.xml',
+        'wizard/customer_wizard.xml',
 
+    ],
+}

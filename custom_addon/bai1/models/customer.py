@@ -45,4 +45,17 @@ class Customer(models.Model):
                 raise odoo.exceptions.UserError('You do not have permission!')
         return super(Customer, self).write(vals=vals)
 
-
+    def update_code_customer(self):
+        ids = [x.id for x in self]
+        view_id = self.env.ref('bai1.mass_update_customer_form').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Update customer code',
+            'view_mode': 'form',
+            'view_id': view_id,
+            'res_model': 'customer.wizard',
+            'target': 'new',
+            'context': {
+                'default_customer_ids': [(6, 0, ids)],
+            }
+        }

@@ -47,8 +47,20 @@
         <field name="domain">[('valid_discount', '=', True)]</field>
     </record>
 
+<!--    actions.server-->
+    <record id="mass_update_customer_form" model="ir.actions.server">
+        <field name="name">UPDATE CUSTOMER</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.update_code_customer()</field>
+    </record>
+
     <menuitem id="customers_menu_catalog" name="Customers" parent="sale.sale_menu_root"/>
     <menuitem action="customer_action" id="all_customers_catalog" name="All customer" parent="customers_menu_catalog"/>
     <menuitem action="valid_discount_customer_action" id="discounted_customers_catalog" name="Discounted customer" parent="customers_menu_catalog"/>
+
+
 
 </odoo>
